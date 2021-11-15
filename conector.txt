@@ -1,0 +1,3 @@
+jdbc:mysql://localhost:3306/eden_pr
+root
+12345678
