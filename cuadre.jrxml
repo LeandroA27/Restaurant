@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="208" pageHeight="561" columnWidth="168" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e1637323-ad2d-4b96-b164-0bc76d29d1fb">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="86"/>
+	<parameter name="cantidad" class="java.lang.String"/>
+	<parameter name="total" class="java.lang.String"/>
+	<parameter name="Logo" class="java.io.InputStream"/>
+	<parameter name="usuario" class="java.lang.String"/>
+	<parameter name="ubicacion" class="java.lang.String"/>
+	<title>
+		<band height="346" splitType="Stretch">
+			<staticText>
+				<reportElement x="29" y="101" width="100" height="14" uuid="03646118-f678-404f-a6d3-edc4574423bd"/>
+				<textElement textAlignment="Center">
+					<font fontName="Dialog" size="7"/>
+				</textElement>
+				<text><![CDATA[TEL.: (829) 698-9319]]></text>
+			</staticText>
+			<image>
+				<reportElement x="43" y="6" width="113" height="80" uuid="02415a57-be57-4a47-81ad-48b68fd7a451"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="86" width="168" height="15" uuid="383133f9-6a4c-40b3-8d7c-12b3d919c825"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Dialog" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MUNDO BURGUER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="108" width="168" height="31" uuid="50692a34-f133-41a4-adb6-f3a87e31ca8e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Dialog" size="7"/>
+				</textElement>
+				<text><![CDATA[Calle 3, Esquina 13, Local 108, Monte Bonito, Cienfuegos
+Santiago, Rep. Dom.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="146" width="168" height="15" uuid="bfc25b53-5987-4544-a45b-1be73b161f78"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Dialog" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuadre de Caja]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="140" width="168" height="1" forecolor="#333333" uuid="3c442111-f6ac-4773-9944-6a67ea2c0ae6"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="1" y="166" width="168" height="1" forecolor="#333333" uuid="b1c535a0-98e6-408f-8a2c-7a2f1418dfa9"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="2" y="253" width="167" height="15" uuid="f083783a-ec92-4480-8000-f5b1780ac09b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Dialog" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad de Facturas]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="2" y="268" width="167" height="20" uuid="67885b5d-ad93-4f55-aef4-da15a4595131"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Dialog"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cantidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="299" width="167" height="15" uuid="10093f2a-6b04-4e14-8672-e6853b3e2de1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Dialog" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto Vendido]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="2" y="314" width="167" height="31" uuid="3a8157d4-ded3-43f5-90d9-4ed7e3b89475"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Dialog" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="174" width="41" height="20" uuid="6c343095-c80e-446b-a379-ffa7b51babe5"/>
+				<textElement>
+					<font fontName="Dialog" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="43" y="174" width="125" height="20" uuid="47b15d4a-d04e-4271-a0b3-e678d0aad86d"/>
+				<textElement>
+					<font fontName="Dialog"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="194" width="41" height="20" uuid="e3283246-51bb-4f18-8db6-081de7a02fb3"/>
+				<textElement>
+					<font fontName="Dialog" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usaurio: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="43" y="194" width="125" height="20" uuid="59636b87-8ce7-4599-b81f-8ccbd909a0fc"/>
+				<textElement>
+					<font fontName="Dialog"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="242" width="168" height="1" forecolor="#333333" uuid="e1a28f03-000b-48a6-8140-435a516ae493"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="2" y="214" width="54" height="20" uuid="4c509117-d521-4c6e-9539-bb77accbcea4"/>
+				<textElement>
+					<font fontName="Dialog" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ubicacion:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="56" y="214" width="112" height="20" uuid="f580abcd-1602-4dcf-8262-72a141850cd6"/>
+				<textElement>
+					<font fontName="Dialog"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ubicacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -16,6 +16,8 @@ public class generador_numerico {
     private int cont1=0;
     private String num="";
     private String num1="";
+    private String numB="";
+    private String numR="";
     
 public void Generar_cliente(int dato){
     this.dato = dato;
@@ -46,7 +48,66 @@ public void Generar_cliente(int dato){
 public String serie_cli(){
     return this.num;
 }
+ //////////////////////////////////////////////////////////////////////////////////////////////
+public void Generar_Bar(int dato){
+    this.dato = dato;
     
+    
+    if ((this.dato>=10000) && (this.dato<99999)){
+        int cant=cont+this.dato;
+        numB = "B" + cant;
+    }
+    
+    if ((this.dato>=100) && (this.dato<1000)){
+        int cant=cont+this.dato;
+        numB = "B00" + cant;
+    }
+    
+    if ((this.dato>=9) && (this.dato<100)){
+        int cant=cont+this.dato;
+        numB = "B000" + cant;
+    }
+    if ((this.dato>=1) && (this.dato<9)){
+        int cant=cont+this.dato;
+        numB = "B0000" + cant;
+    }
+   
+        
+}
+
+public String serie_bar(){
+    return this.numB;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+public void Generar_rest(int dato){
+    this.dato = dato;
+    
+    
+    if ((this.dato>=10000) && (this.dato<99999)){
+        int cant=cont+this.dato;
+        numR = "R" + cant;
+    }
+    
+    if ((this.dato>=100) && (this.dato<1000)){
+        int cant=cont+this.dato;
+        numR = "R00" + cant;
+    }
+    
+    if ((this.dato>=9) && (this.dato<100)){
+        int cant=cont+this.dato;
+        numR = "R000" + cant;
+    }
+    if ((this.dato>=1) && (this.dato<9)){
+        int cant=cont+this.dato;
+        numR = "R0000" + cant;
+    }
+   
+        
+}
+
+public String serie_rest(){
+    return this.numR;
+}
 
  public void Generar_persona(int dato){
     this.dato = dato;

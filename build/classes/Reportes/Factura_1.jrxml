@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="208" pageHeight="561" columnWidth="168" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4d6f0872-7b7a-4691-874e-f906a9776e1c">
+	<property name="ireport.zoom" value="2.000000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="tipo_factura" class="java.lang.String"/>
+	<parameter name="ncf" class="java.lang.String"/>
+	<parameter name="num_factura" class="java.lang.String"/>
+	<parameter name="fecha_ft" class="java.lang.String"/>
+	<parameter name="Nombre_cli" class="java.lang.String"/>
+	<parameter name="Rnc_cli" class="java.lang.String"/>
+	<parameter name="sub_total" class="java.lang.String"/>
+	<parameter name="itbis_total" class="java.lang.String"/>
+	<parameter name="total_t" class="java.lang.String"/>
+	<parameter name="recibido" class="java.lang.String"/>
+	<parameter name="devuelta" class="java.lang.String"/>
+	<parameter name="Logo" class="java.io.InputStream"/>
+	<field name="cantidad" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="total" class="java.lang.String"/>
+	<field name="precio" class="java.lang.String"/>
+	<title>
+		<band height="263" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="89" width="168" height="15" uuid="631fa7a1-76e0-4a65-a8b3-4b04aab10879"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MUNDO BURGUER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="111" width="168" height="31" uuid="10e298ae-5c26-4d6c-9359-c30cb8b835a3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Calle 3, Esquina 13, Local 108, Monte Bonito, Cienfuegos
+Santiago, Rep. Dom.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="141" width="168" height="1" forecolor="#333333" uuid="68d0a8c5-0d89-4c95-b946-7d76a5c679a7"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="175" width="168" height="1" forecolor="#333333" uuid="a522845e-5e52-45b4-966c-d6bd9cc98999"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="176" width="100" height="15" uuid="92883aab-3d82-43f3-9388-61ea256f2da4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[RNC: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="191" width="29" height="15" uuid="eceeca8f-178c-4347-9cb4-1f9115aeabf8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NCF:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="176" width="23" height="15" uuid="e9015970-cf33-41b0-af03-4317e04574bc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Fact.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="206" width="168" height="1" forecolor="#333333" uuid="e6f7341f-8268-4f23-b8ae-6e4caec82a93"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="207" width="29" height="12" uuid="2e759ed3-0e27-4519-bc23-602d9f7abf92"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="219" width="29" height="12" uuid="819c8de1-17b1-4aef-84a1-98f04aa6e141"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[RNC:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="57" y="242" width="68" height="20" forecolor="#FFFFFF" uuid="67a222f0-ad6a-458a-afa8-65bb56466d47"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="104" width="100" height="14" uuid="aea72037-672f-443c-9d5d-f05bf62f104a"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[TEL.: (829) 698-9319]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="125" y="242" width="44" height="20" forecolor="#FFFFFF" uuid="5ebb0a48-6a26-4cdd-b0e7-bb7aa205f2d2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR]]></text>
+			</staticText>
+			<image>
+				<reportElement x="43" y="9" width="113" height="80" uuid="824b666a-10c9-49cb-82f7-1c3d2746762f"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="16" splitType="Stretch"/>
+	</detail>
+	<summary>
+		<band height="133" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="112" width="168" height="20" uuid="cc151549-7120-4296-b6d0-9411b7fe14bd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[GRACIAS POR PREFERIRNOS]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="74fb8516-84ff-4338-b3f4-0b90ab47d91a">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nom_usu" class="java.lang.String"/>
+	<parameter name="total_e" class="java.lang.String"/>
+	<parameter name="monto_i" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="suplidor" class="java.lang.String"/>
+	<field name="ubicacion" class="java.lang.String"/>
+	<field name="costo" class="java.lang.String"/>
+	<field name="precio" class="java.lang.String"/>
+	<field name="existencia" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="203" splitType="Stretch">
+			<staticText>
+				<reportElement x="410" y="72" width="120" height="20" forecolor="#B2B2B4" uuid="0e3d4719-9aad-4c3c-a778-5998cbea07a1">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement markup="none">
+					<font fontName="Dialog" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Impresion:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="72" width="120" height="20" forecolor="#B2B2B4" uuid="f57a0f7d-218a-4bc2-b42a-3908895dc10a"/>
+				<textElement>
+					<font fontName="Dialog" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="141" width="340" height="30" uuid="0a618604-3594-4d0b-af5c-4c66e5cbc1e9">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Dialog" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos generales - Cuentas por cobrar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="15" width="340" height="34" forecolor="#C20E1A" uuid="34cec64d-c71f-47c4-990d-0ec9473ebf04">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Dialog" size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Inventario]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="53" width="556" height="1" uuid="431d35b1-fee1-468c-a04f-13d7caebd073">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid" lineColor="#E6E6E6"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="22" y="92" width="120" height="20" forecolor="#969698" uuid="ad6bf2aa-0e99-4dc5-bc5d-c7d9c400b282"/>
+				<textElement>
+					<font fontName="Dialog"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nom_usu}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="3" y="127" width="556" height="1" uuid="16075bb9-ae5d-4ae5-9962-6f084e4d275f">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid" lineColor="#E6E6E6"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement x="1" y="181" width="555" height="21" forecolor="#C20E1A" backcolor="#C20E1A" uuid="24b5b908-28f5-415c-93b2-92afb987ea0a"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="Detail" x="2" y="182" width="57" height="20" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="1972b7bb-f2d0-4fb5-a8c0-852216fdc45c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1c42acf5-876e-4534-850e-4f18b4222cc5"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Dialog" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="59" y="182" width="116" height="20" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="7570808d-36da-4392-99ce-bb01e713e2cb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4d71332d-9949-49ed-b397-4b6339ad6bf2"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Dialog" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="182" width="88" height="20" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="5a4ae086-916d-444d-a10c-bb889f1229a1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ab5326aa-aed9-46f5-a80d-e2016a8c214c"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Dialog" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="182" width="77" height="20" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="ce8c37dd-59b1-4345-871b-834c9d8f9d87">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7af22c6a-b21f-4bb9-9132-5d5c2c02bfce"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Dialog" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Suplidor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="508" y="182" width="51" height="20" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="9ef388cf-371e-44e9-a0d3-52f0caa05a41">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c340c34e-2efb-42af-bebe-f45ae09a7c69"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Dialog" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Exist.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="329" y="182" width="91" height="20" forecolor="#FFFFFF" uuid="0aaf5460-b381-4f56-9b23-0a93cca268a5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Dialog" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="251" y="182" width="77" height="20" forecolor="#FFFFFF" uuid="84bd33cb-9889-4600-9f3c-c0d2be14b0a6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Dialog" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ubicacion]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="0" width="57" height="20" uuid="456ed191-c48d-41d2-aa91-112bd10df2c1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Dialog"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="59" y="0" width="116" height="20" uuid="2d8929a5-262c-4c73-bb02-8bba9fed1fc3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Dialog"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="175" y="0" width="77" height="20" uuid="dfa77101-2285-4b57-b33e-fe3f2e5493ad"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Dialog"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{suplidor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="251" y="0" width="77" height="20" uuid="0331c13e-3ba5-41ef-982a-7cf82284ade3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Dialog"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ubicacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="329" y="0" width="91" height="20" uuid="8b89722a-e02c-4b4b-9448-072d7be73091"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Dialog"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{costo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="88" height="20" uuid="7fbc2b72-6502-4545-b8b2-e4273cdf4ed4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Dialog"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="508" y="0" width="47" height="20" uuid="a1fdd8d3-bb1f-448a-8f55-5d73f1157551"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Dialog"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{existencia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="177">
+			<staticText>
+				<reportElement x="244" y="110" width="160" height="20" forecolor="#B2B2B4" uuid="7370e326-53fa-47e9-b256-ff2eda74afe6">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Dialog" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total en Existencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="110" width="152" height="20" forecolor="#B2B2B4" uuid="89090d70-2580-4fba-bb3e-90a6239ff2c5">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Dialog" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto Inventario]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="244" y="130" width="160" height="30" forecolor="#969698" uuid="0a141863-50cd-45a8-bf6d-138cda34386f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Dialog" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total_e}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="130" width="152" height="30" forecolor="#969698" uuid="a96fce3b-8589-419d-85c6-73d22a001951"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Dialog" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{monto_i}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

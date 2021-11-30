@@ -4,9 +4,24 @@
  */
 package Formularios;
 
+import Clases.Clase_Variable_Publica;
+import Clases.funciones_login;
+import Clases.funciones_usuarios;
 import com.sun.awt.AWTUtilities;
+import java.awt.Cursor;
+import static java.awt.Frame.WAIT_CURSOR;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import restaurante.conector;
+import tipografias.Fuentes;
 
 /**
  *
@@ -14,16 +29,86 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+    int x,y;
+    Fuentes tipofuente;
+    int visible = 0;
     public Login() {
         initComponents();
-                AWTUtilities.setWindowOpaque(this, false);
+                Clave.setEchoChar('•'); 
+        //setOpacity((float)0.9);
+        AWTUtilities.setWindowOpaque(this, false);
         setLocationRelativeTo(this);
-    }
+         try {
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Icono.png"));
+        setIconImage(icon);
+ setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        if(!usuario_l.getText().isEmpty() && !Clave.getText().isEmpty()){
+        negro_l.setCursor(new Cursor(WAIT_CURSOR));  
+        }
+                 tipofuente = new Fuentes();
 
-void close(){
+        usuario_l.setFont(tipofuente.fuente(tipofuente.RIO, 0, 20));
+        Clave.setFont(tipofuente.fuente(tipofuente.RIO, 0, 20));
+    }
+    ///////////////////////////////////////////////////
+    void acceder (String usuario, String pass){
+      String cap = "";
+      String nombre = "";
+      String sql = "SELECT * FROM usuario WHERE usuario='"+usuario+"' && contra_usu='"+pass+"'";
+      try{
+          Statement st = cn.createStatement();
+          ResultSet rs = st.executeQuery(sql);
+          while(rs.next()){
+              cap = rs.getString("estatus");
+              nombre = rs.getString("nombre_usu");
+          }
+          
+          
+          if (cap.equals("Activo")){
+              this.setVisible(false);
+              //JOptionPane.showMessageDialog(null,"Bienvenido");
+              
+              //back obj = new back();
+              //obj.setVisible(true);
+              this.negro_l.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+              Menu_Principal ingreso = new Menu_Principal();
+              ingreso.setVisible(true);
+              funciones_usuarios fu = new funciones_usuarios();
+            try {
+                fu.conectar_p();
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+              Menu_Principal.nombre_usu_cli.setText(nombre);
+              
+              //ingreso.pack();
+              
+              
+                      
+              
+          }
+          if(cap.equals("Inactivo"))
+          {   
+              JOptionPane.showMessageDialog(null,"Este usuario está inactivo favor intente de nuevo");
+              Clave.setText("");
+              usuario_l.setText("");
+              usuario_l.requestFocus();
+          }
+          
+        if ((!cap.equals("Activo")) && (!cap.equals("Inactivo"))){
+            JOptionPane.showMessageDialog(this,"El usuario y la contraseña no coinciden");
+            Clave.setText("");
+        }  
+          
+      }catch(SQLException ex){
+          
+      }  
+    }
+/////////////////////////////////////////////////////
+    void close(){
         if (JOptionPane.showConfirmDialog(rootPane, "¿Desea realmente salir del sistema?",
                 "Salir del sistema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
             System.exit(0);
@@ -39,7 +124,7 @@ void close(){
         usuario_l = new javax.swing.JTextField();
         negro_l = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -116,7 +201,7 @@ void close(){
                 ClaveKeyPressed(evt);
             }
         });
-        getContentPane().add(Clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 302, 200, 25));
+        getContentPane().add(Clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 303, 200, 25));
 
         usuario_l.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         usuario_l.setBorder(null);
@@ -143,7 +228,7 @@ void close(){
                 usuario_lKeyTyped(evt);
             }
         });
-        getContentPane().add(usuario_l, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 218, 230, 25));
+        getContentPane().add(usuario_l, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 219, 230, 25));
 
         negro_l.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Login.png"))); // NOI18N
         getContentPane().add(negro_l, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 550));
@@ -160,30 +245,27 @@ void close(){
     }//GEN-LAST:event_aceptarMouseExited
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-//        if(Clave.getPassword().equals("")){
-//            JOptionPane.showMessageDialog(null, "Debe ingresar la contraseña");
-//            return;
-//        }
-//        else{
-//            this.negro_l.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//            this.usuario_l.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//            this.Clave.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//            this.aceptar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//            this.cancelar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//            funciones_login fl = new funciones_login();
-//            try {
-//                fl.conectar();
-//                if(Clase_Variable_Publica.valor==1){
-//                    this.dispose();
-//                }else{}
-//            } catch (SQLException ex) {
-//                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        } 
-// TODO add your handling code here:
-Menu_Principal mp = new Menu_Principal();
-mp.setVisible(true);
-this.dispose();
+        if(Clave.getPassword().equals("")){
+            JOptionPane.showMessageDialog(null, "Debe ingresar la contraseña");
+            return;
+        }
+        else{
+            this.negro_l.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            this.usuario_l.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            this.Clave.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            this.aceptar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            this.cancelar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            funciones_login fl = new funciones_login();
+            try {
+                fl.conectar();
+                if(Clase_Variable_Publica.valor==1){
+                    this.dispose();
+                }else{}
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void cancelarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarMouseMoved
@@ -214,26 +296,26 @@ this.dispose();
 
     private void ClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClaveActionPerformed
 
-//        if(Clave.getPassword().equals("")){
-//            JOptionPane.showMessageDialog(null, "Debe ingresar la contraseña");
-//            return;
-//        }
-//        else{
-//            this.negro_l.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//            this.usuario_l.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//            this.Clave.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//            this.aceptar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//            this.cancelar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//            funciones_login fl = new funciones_login();
-//            try {
-//                fl.conectar();
-//                if(Clase_Variable_Publica.valor==1){
-//                    this.dispose();
-//                }else{}
-//            } catch (SQLException ex) {
-//                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
+        if(Clave.getPassword().equals("")){
+            JOptionPane.showMessageDialog(null, "Debe ingresar la contraseña");
+            return;
+        }
+        else{
+            this.negro_l.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            this.usuario_l.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            this.Clave.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            this.aceptar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            this.cancelar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            funciones_login fl = new funciones_login();
+            try {
+                fl.conectar();
+                if(Clase_Variable_Publica.valor==1){
+                    this.dispose();
+                }else{}
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_ClaveActionPerformed
 
@@ -308,4 +390,7 @@ this.dispose();
     public static javax.swing.JLabel negro_l;
     public static javax.swing.JTextField usuario_l;
     // End of variables declaration//GEN-END:variables
+conector cc = new conector();
+    Connection cn = cc.conexion();
+
 }

@@ -34,8 +34,30 @@ public class Carga extends javax.swing.JFrame {
    private Connection conexion = null;
     public Carga() {
         initComponents();
+                pan1.setVisible(false);
+        pan2.setVisible(false);
+        pan3.setVisible(false);
+        pan4.setVisible(false);
+        pan5.setVisible(false);
+        pan6.setVisible(false);
+        pan7.setVisible(false);  
+        pan8.setVisible(false);
+        pan9.setVisible(false);
+        pan10.setVisible(false);
+        pan11.setVisible(false);
+        pan12.setVisible(false);
+        pan13.setVisible(false);
+        
         AWTUtilities.setWindowOpaque(this, false);
         setLocationRelativeTo(null);
+         try {
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Icono.png"));
+        setIconImage(icon);
+ setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
                          tipofuente = new Fuentes();
 
         pan1.setFont(tipofuente.fuente(tipofuente.RIO, 0, 8));
@@ -417,7 +439,7 @@ public void Consultar_num_cot() throws SQLException{
 public void cargar_per_ft() throws SQLException{
     String sl1,sl2,sl3,sl4,sl5,sl6,sl7,sl8;
     String[] registros = new String[30];
-    String sql = "SELECT descuento,edit_precio,tipo_fact,tipo_comp,modif_fact from usuario where nombre_usu='"+Menu_Principal.nombre_usu_cli.getText()+"'";
+    String sql = "SELECT descuento,edit_precio,tipo_comp,modif_fact from usuario where nombre_usu='"+Menu_Principal.nombre_usu_cli.getText()+"'";
 conecta();
 try{
     java.sql.Statement st = conexion.createStatement();
@@ -426,15 +448,13 @@ try{
     while (rs.next()) {
         registros[0] = rs.getString("descuento");
         registros[1] = rs.getString("edit_precio");
-        registros[2] = rs.getString("tipo_fact");
-        registros[3] = rs.getString("tipo_comp");
-        registros[4] = rs.getString("modif_fact");
+        registros[2] = rs.getString("tipo_comp");
+        registros[3] = rs.getString("modif_fact");
 
         sl1 = registros[0];
         sl2 = registros[1];
         sl3= registros[2];
         sl4 = registros[3];
-        sl5 = registros[4];
 
         
         if(sl1.equals("Si")){ Clase_Variable_Publica.descuento_ft = 0; }
@@ -443,13 +463,10 @@ try{
         if(sl2.equals("Si")){ Clase_Variable_Publica.editar_precio_ft = 0; }
         else{Clase_Variable_Publica.editar_precio_ft = 1;}
 
-        if(sl3.equals("Si")){ Clase_Variable_Publica.tipo_factura = 0; }
-        else{Clase_Variable_Publica.tipo_factura = 1;}
-
-        if(sl4.equals("Si")){ Clase_Variable_Publica.comprobante = 0; }
+        if(sl3.equals("Si")){ Clase_Variable_Publica.comprobante = 0; }
         else{Clase_Variable_Publica.comprobante = 1;}
 
-        if(sl5.equals("Si")){ Clase_Variable_Publica.modificar_ft = 0; }
+        if(sl4.equals("Si")){ Clase_Variable_Publica.modificar_ft = 0; }
         else{Clase_Variable_Publica.modificar_ft = 1;}
 
 
