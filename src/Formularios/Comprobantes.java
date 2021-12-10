@@ -8,7 +8,6 @@ package Formularios;
 import Clases.Clase_Variable_Publica;
 import Clases.prueba;
 import Clases.render_tabla_comprobantes;
-import com.sun.awt.AWTUtilities;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -40,8 +39,9 @@ public class Comprobantes extends javax.swing.JFrame {
 Fuentes tipofuente;
     public Comprobantes() {
         initComponents();
+        Clase_Variable_Publica.modulo = 6;
         this.setLocationRelativeTo(null);
-        AWTUtilities.setWindowOpaque(this, false);
+        this.setBackground(new Color(0,0,0,0));
         setCellRender(tabla_comprobante);
                 try {
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Icono.png"));
@@ -672,7 +672,8 @@ try{
         //Menu_Principal ob = new Menu_Principal();
         //ob.setVisible(true);
         //nombre_usu_cli.setText(nombre_usu_fac.getText());
-        close();       // TODO add your handling code here:
+        close();
+        Clase_Variable_Publica.modulo = 0;// TODO add your handling code here:
     }//GEN-LAST:event_volverAtrasActionPerformed
 
     private void procesar_compActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesar_compActionPerformed

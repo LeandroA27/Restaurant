@@ -7,7 +7,7 @@ package Formularios;
 import Clases.Clase_Variable_Publica;
 import Clases.render_tabla_servicios_consulta;
 import static Formularios.Articulo.*;
-import com.sun.awt.AWTUtilities;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -34,7 +34,7 @@ Fuentes tipofuente;
     public Consulta_Producto() {
         initComponents();
                 this.setLocationRelativeTo(null);
-        AWTUtilities.setWindowOpaque(this, false);
+        this.setBackground(new Color(0,0,0,0));
         setCellRender(tabla_servicios);
         //pintarColumna();
         tipofuente = new Fuentes();

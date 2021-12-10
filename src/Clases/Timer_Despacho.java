@@ -1,0 +1,112 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Clases;
+
+import Formularios.Despacho;
+import static Formularios.Despacho.*;
+import static Formularios.Despacho.tablaDespacho;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import restaurante.conector;
+
+/**
+ *
+ * @author Leandro Aquino
+ */
+public class Timer_Despacho extends TimerTask{
+private Connection conexion = null;
+    @Override
+    public void run() {
+                try {
+            conecta();
+            //comparacion_fecha();
+          transaccion();
+          contar_filas();
+        } catch (SQLException ex) {
+        Logger.getLogger(Timer_Despacho.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+            cerrar();
+        }
+    }
+    public void conecta() throws SQLException{
+//           String direc = conexion_2.valor;
+//    String contra = conexion_2.clave;
+//    String usu = conexion_2.usu;
+//    
+//        String jdbc= direc;
+        conexion = DriverManager.getConnection(conexion_2.cadena1,conexion_2.cadena2,conexion_2.cadena3);
+        conexion.setAutoCommit(false);
+    }
+     private void transaccion() throws SQLException{
+        PreparedStatement despacho = null; 
+    String desp = "No";
+    DefaultTableModel modelo3 =(DefaultTableModel) Despacho.tablaDespacho.getModel();
+    modelo3.getDataVector().clear();
+    DefaultTableModel dtm = (DefaultTableModel) Despacho.tablaDespacho.getModel();
+        dtm.setRowCount(0);
+    String[] registros = new String[6];
+    final String detalle ="SELECT cantidad,descr_serv,num_factura,tipo_despacho FROM detalle_fact where despacho='"+desp+"' order by num_factura ASC";
+//            despacho =conexion.prepareStatement(detalle);
+//            despacho.executeUpdate();    
+    try{
+        despacho = conexion.prepareStatement(detalle);
+        ResultSet rs = despacho.executeQuery();
+    
+    while (rs.next()) {
+        registros[0] = rs.getString("cantidad");
+        registros[1] = rs.getString("descr_serv");
+        registros[2]= rs.getString("num_factura"); 
+        registros[3]= rs.getString("tipo_despacho"); 
+
+
+        modelo3.addRow(registros);
+    }
+    Despacho.tablaDespacho.setModel(modelo3);
+        conexion.commit();
+    }catch (SQLException ex){
+    JOptionPane.showMessageDialog(null, ex);
+   }
+    //finally{
+//            if(despacho !=null){
+//                despacho.close(); 
+//            }
+//        }
+
+    
+    
+           }
+                
+
+void cerrar(){
+
+    }
+public void contar_filas(){
+//    for(int i=1;i<tablaDespacho.getRowCount();i++)
+//{
+//int fila = i+1;
+//if(fila==1){
+//  cantidad_pedidos.setText("0");  
+//}else{
+//  cantidad_pedidos.setText(""+fila);
+//}
+//} 
+
+DefaultTableModel model = (DefaultTableModel) tablaDespacho.getModel();
+        int filas = model.getRowCount();
+        cantidad_pedidos.setText(String.valueOf(filas)); 
+}
+     conector cc = new conector();
+    Connection cn = cc.conexion(); 
+}
+

@@ -7,7 +7,7 @@ package Formularios;
 import Clases.Clase_Variable_Publica;
 import Clases.funciones_login;
 import Clases.funciones_usuarios;
-import com.sun.awt.AWTUtilities;
+import java.awt.Color;
 import java.awt.Cursor;
 import static java.awt.Frame.WAIT_CURSOR;
 import java.awt.Image;
@@ -36,7 +36,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
                 Clave.setEchoChar('•'); 
         //setOpacity((float)0.9);
-        AWTUtilities.setWindowOpaque(this, false);
+        this.setBackground(new Color(0,0,0,0));
         setLocationRelativeTo(this);
          try {
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Icono.png"));

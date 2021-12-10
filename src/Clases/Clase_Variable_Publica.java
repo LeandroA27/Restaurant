@@ -56,5 +56,7 @@ public static int modificar_usu = 0;
 public static float delimitador = 0;
 
 public static int modificar_actrivo = 0;
+
+public static int modulo = 0;
 //public static Facturacion v = new Facturacion(); 
 }

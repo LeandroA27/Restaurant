@@ -405,20 +405,27 @@ try{
             comp = cod_serv_fact.getText();
             String[] registros = new String[2];
             try {
-             final String detalle = "SELECT estado_serv FROM servicios where codigo_serv='"+cod_serv_fact.getText()+"'";
+             final String detalle = "SELECT estado_serv,existencia FROM servicios where codigo_serv='"+cod_serv_fact.getText()+"'";
             cargar = conexion.prepareStatement(detalle);
             ResultSet rs = cargar.executeQuery();
             if(rs.next()){
                 registros[0] = rs.getString("estado_serv");
+                registros[1] = rs.getString("existencia");
                 es=registros[0];
+                cant = Integer.parseInt(registros[1]);
             }
+            JOptionPane.showMessageDialog(null,cant);
             if(es.equals("Inactivo")){
-               JOptionPane.showMessageDialog(null,"Este servicio esta inactivo");
+               JOptionPane.showMessageDialog(null,"Este articulo esta inactivo");
                 
             }else{
-               proceso_articulo();
-               desc_serv.setText("0.00");
-            }
+                if(cant > 0){
+                  JOptionPane.showMessageDialog(null,"Este articulo no tiene existencia");  
+                }else{
+                proceso_articulo();
+                 desc_serv.setText("0.00");
+                }
+                 }
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, ex);
 
@@ -427,7 +434,7 @@ try{
     public void proceso_articulo(){
         PreparedStatement cargar = null; 
         if(cod_serv_fact.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Debe ingresar el codigo del servicio");
+            JOptionPane.showMessageDialog(null, "Debe ingresar el codigo del articulo");
         }else{
             String cont ="";
             String comp = "";
@@ -438,24 +445,26 @@ try{
             comp = cod_serv_fact.getText();
             String[] registros = new String[2];
             try {
-                final String detalle = "SELECT cod_art,ubicacion FROM articulo where cod_art='"+cod_serv_fact.getText()+"'";
+                final String detalle = "SELECT cod_art,existencia FROM articulo where cod_art='"+cod_serv_fact.getText()+"'";
             cargar = conexion.prepareStatement(detalle);
             ResultSet rs = cargar.executeQuery();
             if(rs.next()){
                 registros[0] = rs.getString("cod_art");
-                registros[1] = rs.getString("ubicacion");
+                registros[1] = rs.getString("existencia");
                 es=registros[0];
                 ub=registros[1];
+                cant = Integer.parseInt(ub);
             }
             if(es.isEmpty()){
-               JOptionPane.showMessageDialog(null,"Este servicio no existe");   
+               JOptionPane.showMessageDialog(null,"Este articulo no existe");   
             }else{
-                if(ub.equals(Clase_Variable_Publica.ubicacion)){
+                if(cant <=0){
+                    JOptionPane.showMessageDialog(null,"Este articulo no tiene existencia");  
+                }else{
                         cargar_pro();
                         cant_fact.requestFocus();
-                }else{
-                   JOptionPane.showMessageDialog(null,"Este articulo no es de esta area");  
                 }
+
             }
         }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, ex);

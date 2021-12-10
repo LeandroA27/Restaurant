@@ -8,10 +8,10 @@ package Formularios;
 import Clases.Clase_Variable_Publica;
 import Clases.Funciones_art;
 import Clases.generador_numerico;
-import com.sun.awt.AWTUtilities;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,6 +34,7 @@ public class Articulo extends javax.swing.JFrame {
 Fuentes tipofuente;
     public Articulo() {
         initComponents();
+        Clase_Variable_Publica.modulo = 2;
         tipo_letra();
         set_valor();
         Consultar_num_usu();
@@ -44,7 +45,7 @@ Fuentes tipofuente;
         Naranja_pnl.setVisible(false);
         Rojo_pnl.setVisible(false);
         slcRest_art.setSelected(true);
-        AWTUtilities.setWindowOpaque(this, false);
+        this.setBackground(new Color(0,0,0,0));
         setLocationRelativeTo(null);
         try {
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Icono.png"));
@@ -949,7 +950,8 @@ void close(){
         //Menu_Principal ob = new Menu_Principal();
         //ob.setVisible(true);
         //nombre_usu_cli.setText(nombre_usu_fac.getText());
-        close();       // TODO add your handling code here:
+        close(); 
+        Clase_Variable_Publica.modulo = 0;// TODO add your handling code here:
     }//GEN-LAST:event_volverAtrasActionPerformed
 
     private void volverMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverMouseMoved
@@ -976,7 +978,7 @@ void close(){
     private void Descrip_invKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Descrip_invKeyTyped
         char c = evt.getKeyChar();
         if ((c<'a'|| c>'z') && (c<'A' || c>'Z') && (c<'0' || c>'9') && (c!='.') &&(c!='@')
-            &&(c!='#')&&(c!='!')&&(c!='$')&&(c!='%')&&(c!='&')&&(c!='?')&&(c!=',')&&(c!=':')&&(c!=';') && c!= com.sun.glass.events.KeyEvent.VK_SPACE) evt.consume();    
+            &&(c!='#')&&(c!='!')&&(c!='$')&&(c!='%')&&(c!='&')&&(c!='?')&&(c!=',')&&(c!=':')&&(c!=';') && c!= KeyEvent.VK_SPACE) evt.consume();    
         // TODO add your handling code here:
     }//GEN-LAST:event_Descrip_invKeyTyped
 
@@ -987,7 +989,7 @@ void close(){
     private void Marca_invKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Marca_invKeyTyped
         char c = evt.getKeyChar();
         if ((c<'a'|| c>'z') && (c<'A' || c>'Z') && (c<'0' || c>'9') && (c!='.') &&(c!='@')
-            &&(c!='#')&&(c!='!')&&(c!='$')&&(c!='%')&&(c!='&')&&(c!='?')&&(c!=',')&&(c!=':')&&(c!=';') && c!= com.sun.glass.events.KeyEvent.VK_SPACE) evt.consume();        // TODO add your handling code here:
+            &&(c!='#')&&(c!='!')&&(c!='$')&&(c!='%')&&(c!='&')&&(c!='?')&&(c!=',')&&(c!=':')&&(c!=';') && c!= KeyEvent.VK_SPACE) evt.consume();        // TODO add your handling code here:
     }//GEN-LAST:event_Marca_invKeyTyped
 
     private void Cocdigo_invMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Cocdigo_invMouseClicked
@@ -1027,7 +1029,7 @@ Clase_Variable_Publica.art = 2;
     private void Suplidor_invKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Suplidor_invKeyTyped
         char c = evt.getKeyChar();
         if ((c<'a'|| c>'z') && (c<'A' || c>'Z') && (c<'0' || c>'9') && (c!='.') &&(c!='@')
-            &&(c!='#')&&(c!='!')&&(c!='$')&&(c!='%')&&(c!='&')&&(c!='?')&&(c!=',')&&(c!=':')&&(c!=';') && c!= com.sun.glass.events.KeyEvent.VK_SPACE) evt.consume();        // TODO add your handling code here:
+            &&(c!='#')&&(c!='!')&&(c!='$')&&(c!='%')&&(c!='&')&&(c!='?')&&(c!=',')&&(c!=':')&&(c!=';') && c!= KeyEvent.VK_SPACE) evt.consume();        // TODO add your handling code here:
     }//GEN-LAST:event_Suplidor_invKeyTyped
 
     private void Costo_invMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Costo_invMouseClicked

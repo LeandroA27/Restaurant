@@ -8,7 +8,6 @@ import Clases.Clase_Variable_Publica;
 import Clases.funciones_usuarios;
 import Clases.generador_numerico;
 import Clases.render_tabla_usuario;
-import com.sun.awt.AWTUtilities;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -41,9 +40,10 @@ public class Usuarios extends javax.swing.JFrame {
 
     public Usuarios() {
         initComponents();
+        Clase_Variable_Publica.modulo = 7;
         coparacion();
         this.setLocationRelativeTo(null);
-        AWTUtilities.setWindowOpaque(this, false);
+        this.setBackground(new Color(0,0,0,0));
         setOpacity((float) 1.0);
         setCellRender(tabla_usuario);
         tipo_letra();
@@ -1050,7 +1050,8 @@ public class Usuarios extends javax.swing.JFrame {
         //Menu_Principal ob = new Menu_Principal();
         //ob.setVisible(true);
         //nombre_usu_cli.setText(nombre_usu_fac.getText());
-        close();       // TODO add your handling code here:
+        close();   
+        Clase_Variable_Publica.modulo = 0;// TODO add your handling code here:
     }//GEN-LAST:event_volverAtrasActionPerformed
 
     private void btn_minimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_minimizarActionPerformed
@@ -1254,7 +1255,7 @@ public class Usuarios extends javax.swing.JFrame {
     private void Nombre_usuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Nombre_usuKeyTyped
         char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < '0' || c > '9') && (c != '.') && (c != '@')
-                && (c != '#') && (c != '!') && (c != '$') && (c != '%') && (c != '&') && (c != '?') && (c != ',') && (c != ':') && (c != ';') && c != com.sun.glass.events.KeyEvent.VK_SPACE) {
+                && (c != '#') && (c != '!') && (c != '$') && (c != '%') && (c != '&') && (c != '?') && (c != ',') && (c != ':') && (c != ';') && c != KeyEvent.VK_SPACE) {
             evt.consume();
         }
     }//GEN-LAST:event_Nombre_usuKeyTyped
@@ -1300,7 +1301,7 @@ public class Usuarios extends javax.swing.JFrame {
 
         char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < '0' || c > '9') && (c != '.') && (c != '@')
-                && (c != '#') && (c != '!') && (c != '$') && (c != '%') && (c != '&') && (c != '?') && (c != ',') && (c != ':') && (c != ';') && c != com.sun.glass.events.KeyEvent.VK_SPACE) {
+                && (c != '#') && (c != '!') && (c != '$') && (c != '%') && (c != '&') && (c != '?') && (c != ',') && (c != ':') && (c != ';') && c != KeyEvent.VK_SPACE) {
             evt.consume();
         }
         if (evt.getKeyCode() == KeyEvent.VK_TAB) {
@@ -1335,7 +1336,7 @@ public class Usuarios extends javax.swing.JFrame {
     private void clave_usuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clave_usuKeyTyped
         char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < '0' || c > '9') && (c != '.') && (c != '@')
-                && (c != '#') && (c != '!') && (c != '$') && (c != '%') && (c != '&') && (c != '?') && (c != ',') && (c != ':') && (c != ';') && c != com.sun.glass.events.KeyEvent.VK_SPACE) {
+                && (c != '#') && (c != '!') && (c != '$') && (c != '%') && (c != '&') && (c != '?') && (c != ',') && (c != ':') && (c != ';') && c != KeyEvent.VK_SPACE) {
             evt.consume();
         }
         if (evt.getKeyCode() == KeyEvent.VK_TAB) {
@@ -1366,7 +1367,7 @@ public class Usuarios extends javax.swing.JFrame {
     private void confir_clave_usuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_confir_clave_usuKeyTyped
         char c = evt.getKeyChar();
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < '0' || c > '9') && (c != '.') && (c != '@')
-                && (c != '#') && (c != '!') && (c != '$') && (c != '%') && (c != '&') && (c != '?') && (c != ',') && (c != ':') && (c != ';') && c != com.sun.glass.events.KeyEvent.VK_SPACE) {
+                && (c != '#') && (c != '!') && (c != '$') && (c != '%') && (c != '&') && (c != '?') && (c != ',') && (c != ':') && (c != ';') && c != KeyEvent.VK_SPACE) {
             evt.consume();  
         }// TODO add your handling code here:
     }//GEN-LAST:event_confir_clave_usuKeyTyped

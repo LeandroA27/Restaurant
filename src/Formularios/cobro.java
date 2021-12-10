@@ -10,6 +10,7 @@ import Clases.Conexion_factura_Modificar;
 import Clases.Conexion_factura_guardar;
 import Clases.Factura_1;
 import Clases.generador_numerico;
+import Clases.peticion;
 import static Formularios.Cambio_Clave.clave_anterior;
 import static Formularios.Cambio_Clave.clave_nueva;
 import static Formularios.Cambio_Clave.confirmar_clave;
@@ -43,9 +44,12 @@ import static Formularios.Facturacion.tipo_fact1;
 import static Formularios.Facturacion.tiponcf_anterior;
 import static Formularios.Facturacion.total_devueltas;
 import static Formularios.Facturacion.total_fact;
-import com.sun.awt.AWTUtilities;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -81,8 +85,9 @@ import tipografias.Fuentes;
  *
  * @author Leandro Aquino
  */
-public class cobro extends javax.swing.JFrame {
+public class cobro extends javax.swing.JFrame implements Runnable {
 Fuentes tipofuente;
+Thread hi;
 private String ubic = Clase_Variable_Publica.ubicacion; 
  private final String Logo ="/Imagenes/Logo_calidad.png";
     public cobro() {
@@ -95,7 +100,7 @@ private String ubic = Clase_Variable_Publica.ubicacion;
             System.out.println(e);
         }
         this.setLocationRelativeTo(null);
-        AWTUtilities.setWindowOpaque(this, false);
+        this.setBackground(new Color(0,0,0,0));
         tipofuente = new Fuentes();
         Monto_pagar.setFont(tipofuente.fuente(tipofuente.RIO,0,20));
         Forma_pago.setFont(tipofuente.fuente(tipofuente.RIO,0,15));
@@ -171,7 +176,7 @@ void reimprimir1(){
         
         JasperPrint jp = JasperFillManager.fillReport(jr, parametro,new JRBeanCollectionDataSource(lista1));
        //JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
-//       PrintReportToPrinter(jp);
+       PrintReportToPrinter(jp);
        limpiar1();
 cod_serv_fact.requestFocus();
 Clase_Variable_Publica.modificar_actrivo=0;
@@ -183,9 +188,9 @@ desbloquear();
                     Consultar_num_cot();    
                     }
 
-        JasperViewer jv = new JasperViewer(jp,false);
-        jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        jv.setVisible(true);
+//        JasperViewer jv = new JasperViewer(jp,false);
+//        jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//        jv.setVisible(true);
         
         }catch(JRException ex){
             ex.printStackTrace();
@@ -365,6 +370,28 @@ reimprimir_fact.setEnabled(true);
         } catch (Exception e) {
         }
     } 
+    public void solicitud(){
+      String HOST = "10.0.0.11";
+             int PUERTO = 5000;
+             DataInputStream in;
+             DataOutputStream out; 
+             
+             try {
+            Socket sc = new Socket(HOST,PUERTO);
+            
+            in = new DataInputStream(sc.getInputStream());
+            out = new DataOutputStream(sc.getOutputStream());
+            
+            //out.writeUTF("Ejecuta el aasunto");
+            String mensaje = in.readUTF();
+            
+            //JOptionPane.showMessageDialog(null, mensaje);
+            
+            sc.close();
+            
+        } catch (Exception e) {
+        } 
+   }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -511,6 +538,8 @@ if(!devuelta.getText().isEmpty()){
                 Conexion_factura_guardar cfg = new Conexion_factura_guardar();
                 try {
                     cfg.conectar();
+                     peticion pt = new peticion();
+                     pt.run();
                     this.dispose();
                     } catch (SQLException ex) {
                     Logger.getLogger(Facturacion.class.getName()).log(Level.SEVERE, null, ex);
@@ -523,6 +552,8 @@ if(!devuelta.getText().isEmpty()){
                         Conexion_factura_Modificar cfm = new Conexion_factura_Modificar();
                         try {
                             cfm.conectar();
+                            peticion pt = new peticion();
+                            pt.run();
                             this.dispose();
                         } catch (SQLException ex) {
                             Logger.getLogger(Facturacion.class.getName()).log(Level.SEVERE, null, ex);
@@ -531,16 +562,19 @@ if(!devuelta.getText().isEmpty()){
                     }else{
                 
                 reimprimir1();
-
+                 peticion pt = new peticion();
+                 pt.run();
                this.dispose();
             }
+            
+          
         
 }
 }else{
     JOptionPane.showMessageDialog(null, "Debes de darle a enter para que se genere el cobro");
     Monto_pagado.requestFocus();
 }
-       // TODO add your handling code here:
+     // TODO add your handling code here:
     }//GEN-LAST:event_procesar_cobroActionPerformed
 
     private void cancelar_cobroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar_cobroActionPerformed
@@ -644,6 +678,20 @@ if (monto > dinero){
     public static javax.swing.JLabel pago_delivery;
     private javax.swing.JButton procesar_cobro;
     // End of variables declaration//GEN-END:variables
-    conector cc = new conector();
-    Connection cn = cc.conexion();
+    @Override
+     public void run() {
+    Thread ct= Thread.currentThread();
+    
+    while(ct==hi){
+    solicitud();
+        try{
+            Thread.sleep(1000);
+        }catch(InterruptedException e){}
+        }    
+        
+      
+    }
+        conector cc = new conector();
+    Connection cn = cc.conexion();    
+    
 }

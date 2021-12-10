@@ -5,26 +5,40 @@
  */
 package Formularios;
 
+import Clases.Clase_Variable_Publica;
+import Clases.Timer_Despacho;
+import Clases.conexion_2;
+import Clases.funcion_despacho;
 import static Formularios.Consulta_Producto.tabla_servicios;
 import static Formularios.Facturacion.cod_serv_fact;
 import static Formularios.Facturacion.tablafacturacion1;
 import static Formularios.Reimprimir.Buscar_facrt_in;
-import com.sun.awt.AWTUtilities;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
+import java.util.Timer;
 import javax.swing.table.DefaultTableModel;
 import restaurante.conector;
 import tipografias.Fuentes;
@@ -33,16 +47,19 @@ import tipografias.Fuentes;
  *
  * @author Leandro Aquino
  */
-public class Despacho extends javax.swing.JFrame {
-
-     private Timer timer;
-     Fuentes tipofuente;
+public class Despacho extends javax.swing.JFrame implements Runnable {
+    static Socket s;
+    static DataInputStream din;
+    static DataOutputStream dout; 
+    Thread hi;
+    
+    Fuentes tipofuente;
     private Connection conexion = null;
-    private int delay = 10000;
     public Despacho() {
         initComponents();
+        Clase_Variable_Publica.modulo = 3;
                 this.setLocationRelativeTo(null);
-        AWTUtilities.setWindowOpaque(this, false);
+        this.setBackground(new Color(0,0,0,0));
         try {
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Icono.png"));
         setIconImage(icon);
@@ -53,29 +70,33 @@ public class Despacho extends javax.swing.JFrame {
                 tipofuente = new Fuentes();
         cantidad_pedidos.setFont(tipofuente.fuente(tipofuente.RIO, 0, 30));
         tablaDespacho.setFont(tipofuente.fuente(tipofuente.RIO, 0, 30));
-        
-        correr();
-             
+        Timer_Despacho despacho = new Timer_Despacho();
+        despacho.run();
+        hi = new Thread(this);
+        hi.start();
+      
     }
     
-    public void correr() {
+    public void conectar() throws SQLException {
+        try {
+            conecta();
+            //comparacion_fecha();
+          cargar_pedidos();
+        } finally {
+            cerrar();
+        }
+    }
+    void cerrar(){
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                ActionListener action = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent event) {
-                        cargar_pedidos();
-                        contar_filas();
-                    }
-                };
-
-                timer = new Timer(delay, action);
-                timer.setInitialDelay(0);
-                timer.start();
-            }
-        });
+    }
+        public void conecta() throws SQLException{
+//           String direc = conexion_2.valor;
+//    String contra = conexion_2.clave;
+//    String usu = conexion_2.usu;
+//    
+//        String jdbc= direc;
+        conexion = DriverManager.getConnection(conexion_2.cadena1,conexion_2.cadena2,conexion_2.cadena3);
+        conexion.setAutoCommit(false);
     }
     public void cargar_pedidos(){
     String desp = "No";
@@ -126,6 +147,34 @@ DefaultTableModel model = (DefaultTableModel) tablaDespacho.getModel();
         int filas = model.getRowCount();
         cantidad_pedidos.setText(String.valueOf(filas)); 
 }
+public void escucha(){
+    ServerSocket servidor = null;
+    Socket sc = null;
+    final int PUERTO = 5000;
+    DataInputStream in;
+    DataOutputStream out;
+    
+        try {
+            servidor = new ServerSocket(PUERTO);
+            
+            while(true){
+                sc = servidor.accept();
+                in = new DataInputStream(sc.getInputStream());
+                out = new DataOutputStream(sc.getOutputStream());
+                
+                String mensaje = in.readUTF();
+                
+                //JOptionPane.showMessageDialog(null, mensaje);
+                out.writeUTF("Hay una Conexion");
+                sc.close();  
+                Timer_Despacho despacho = new Timer_Despacho();
+                despacho.run();
+            }
+            
+        } catch (Exception e) {
+        }
+ 
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -137,6 +186,7 @@ DefaultTableModel model = (DefaultTableModel) tablaDespacho.getModel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaDespacho = new javax.swing.JTable();
+        enviar_cl = new javax.swing.JTextField();
         cantidad_pedidos = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -241,6 +291,20 @@ DefaultTableModel model = (DefaultTableModel) tablaDespacho.getModel();
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 178, 1205, 406));
 
+        enviar_cl.setBackground(new java.awt.Color(228, 228, 228));
+        enviar_cl.setFont(new java.awt.Font("Dialog", 1, 17)); // NOI18N
+        enviar_cl.setForeground(new java.awt.Color(198, 54, 53));
+        enviar_cl.setBorder(null);
+        enviar_cl.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                enviar_clKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                enviar_clKeyTyped(evt);
+            }
+        });
+        getContentPane().add(enviar_cl, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 420, 30));
+
         cantidad_pedidos.setForeground(new java.awt.Color(198, 54, 53));
         getContentPane().add(cantidad_pedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 606, 150, 60));
 
@@ -267,7 +331,8 @@ DefaultTableModel model = (DefaultTableModel) tablaDespacho.getModel();
         //Menu_Principal ob = new Menu_Principal();
         //ob.setVisible(true);
         //nombre_usu_cli.setText(nombre_usu_fac.getText());
-        close();       // TODO add your handling code here:
+        close(); 
+        Clase_Variable_Publica.modulo = 0;// TODO add your handling code here:
     }//GEN-LAST:event_volverAtrasActionPerformed
 
     private void tablaDespachoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDespachoMouseClicked
@@ -290,12 +355,28 @@ DefaultTableModel model = (DefaultTableModel) tablaDespacho.getModel();
      }catch (SQLException ex){
                Logger.getLogger(Articulo.class.getName()).log(Level.SEVERE,null, ex);
      }        // TODO add your handling code here:
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void enviar_clKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_enviar_clKeyPressed
+      // TODO add your handling code here:
+    }//GEN-LAST:event_enviar_clKeyPressed
+
+    private void enviar_clKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_enviar_clKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < '0' || c > '9') && (c != '.') && (c != '@')
+            && (c != '#') && (c != 'ñ') && (c != 'Ñ') && (c != '!') && (c != '$') && (c != '%') && (c != '&') && (c != '?') && (c != ',') && (c != ':') && (c != ';') && c != KeyEvent.VK_SPACE) {
+            evt.consume();
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_enviar_clKeyTyped
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -323,21 +404,42 @@ DefaultTableModel model = (DefaultTableModel) tablaDespacho.getModel();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Despacho().setVisible(true);
+                
+                
+                
+                
             }
-        });
+        });   
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_minimizar;
-    private javax.swing.JLabel cantidad_pedidos;
+    public static javax.swing.JLabel cantidad_pedidos;
     private javax.swing.JLabel descri_out;
+    public static javax.swing.JTextField enviar_cl;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel numfact_out;
-    private javax.swing.JTable tablaDespacho;
+    public static javax.swing.JTable tablaDespacho;
     private javax.swing.JButton volverAtras;
     // End of variables declaration//GEN-END:variables
-conector cc = new conector();
+    @Override
+    public void run() {
+    Thread ct= Thread.currentThread();
+    
+    while(ct==hi){
+    escucha();
+        try{
+            Thread.sleep(1000);
+        }catch(InterruptedException e){}
+        }    
+        
+      
+    }
+    conector cc = new conector();
     Connection cn = cc.conexion();
+
 }

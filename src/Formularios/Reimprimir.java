@@ -7,7 +7,7 @@ package Formularios;
 import Clases.Clase_Variable_Publica;
 import Clases.consultas;
 import Clases.render_tabla_reimprimir_factura;
-import com.sun.awt.AWTUtilities;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -35,7 +35,7 @@ public class Reimprimir extends javax.swing.JFrame {
         initComponents();
         setCellRender(tabla_factura_cs);
                 this.setLocationRelativeTo(null);
-        AWTUtilities.setWindowOpaque(this, false);
+        this.setBackground(new Color(0,0,0,0));
         try {
             Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Icono.png"));
             setIconImage(icon);

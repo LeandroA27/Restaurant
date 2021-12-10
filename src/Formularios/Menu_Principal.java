@@ -6,7 +6,7 @@ package Formularios;
 
 import Clases.Clase_Variable_Publica;
 import Clases.generador_numerico;
-import com.sun.awt.AWTUtilities;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -52,7 +52,7 @@ int giro =180;
          pregunta_cambiarC.setVisible(false);
         btn_no1.setVisible(false);
         btn_si1.setVisible(false);
-        AWTUtilities.setWindowOpaque(this, false);
+        this.setBackground(new Color(0,0,0,0));
         this.setLocationRelativeTo(null);
     try {
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Icono.png"));
@@ -472,10 +472,13 @@ int giro =180;
 
     private void BtnfacturacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnfacturacionActionPerformed
 if(Clase_Variable_Publica.permiso_fact==0){
-
-Facturacion fct = new Facturacion();
+    if(Clase_Variable_Publica.modulo == 1){
+        JOptionPane.showMessageDialog(rootPane, "El formulario de facturacion ya esta abierto");
+    }else{
+      Facturacion fct = new Facturacion();
 fct.setVisible(true);
-Facturacion.nombre_usu_fact.setText(nombre_usu_cli.getText());
+Facturacion.nombre_usu_fact.setText(nombre_usu_cli.getText());  
+    }
 
 }else{
 JOptionPane.showMessageDialog(rootPane, "Este usuario no tiene permiso para facturacion");
@@ -485,16 +488,14 @@ JOptionPane.showMessageDialog(rootPane, "Este usuario no tiene permiso para fact
 
     private void BtncomprobantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtncomprobantesActionPerformed
 if(Clase_Variable_Publica.permiso_compro==0){
-//    funciones_menuprincipal fm = new funciones_menuprincipal();
-//    try {
-//        fm.conectar();
-//    } catch (SQLException ex) {
-//        Logger.getLogger(Menu_Principal.class.getName()).log(Level.SEVERE, null, ex);
-//    }
+if(Clase_Variable_Publica.modulo == 6){
+        JOptionPane.showMessageDialog(rootPane, "El formulario de comprobantes ya esta abierto");
+    }else{
 Comprobantes fact = new Comprobantes();
 fact.setVisible(true);
 Comprobantes.nombre_usu_comp.setText(nombre_usu_cli.getText());
 //this.dispose();
+}
 }else{
 JOptionPane.showMessageDialog(rootPane, "Este usuario no tiene permiso para comprobantes");
 }
@@ -503,16 +504,14 @@ JOptionPane.showMessageDialog(rootPane, "Este usuario no tiene permiso para comp
 
     private void BtnarticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnarticuloActionPerformed
 if(Clase_Variable_Publica.permiso_art==0){
-//    funciones_menuprincipal fm = new funciones_menuprincipal();
-//    try {
-//        fm.conectar();
-//    } catch (SQLException ex) {
-//        Logger.getLogger(Menu_Principal.class.getName()).log(Level.SEVERE, null, ex);
-//    }
-        Articulo art = new Articulo();
+    if(Clase_Variable_Publica.modulo == 2){
+      JOptionPane.showMessageDialog(rootPane, "El modulo de articulo ya esta abierto");  
+    }else{
+            Articulo art = new Articulo();
 art.setVisible(true);
 Articulo.nombre_usu_art.setText(nombre_usu_cli.getText());
-//this.dispose();
+//this.dispose();    
+    }
 }else{
 JOptionPane.showMessageDialog(rootPane, "Este usuario no tiene permiso para articulo");
 }
@@ -521,16 +520,14 @@ JOptionPane.showMessageDialog(rootPane, "Este usuario no tiene permiso para arti
 
     private void BtninventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtninventarioActionPerformed
 if(Clase_Variable_Publica.permiso_inv==0){
-//    funciones_menuprincipal fm = new funciones_menuprincipal();
-//    try {
-//        fm.conectar();
-//    } catch (SQLException ex) {
-//        Logger.getLogger(Menu_Principal.class.getName()).log(Level.SEVERE, null, ex);
-//    }
+if(Clase_Variable_Publica.modulo == 4){
+      JOptionPane.showMessageDialog(rootPane, "El modulo de inventario ya esta abierto");  
+    }else{
 Inventario inv = new Inventario();
 inv.setVisible(true);
 Inventario.nombre_usu_inv.setText(nombre_usu_cli.getText());
 //this.dispose();
+}
 }else{
 JOptionPane.showMessageDialog(rootPane, "Este usuario no tiene permiso para inventario");
 }
@@ -539,16 +536,14 @@ JOptionPane.showMessageDialog(rootPane, "Este usuario no tiene permiso para inve
 
     private void BtndespachoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtndespachoActionPerformed
 if(Clase_Variable_Publica.permiso_desp==0){
-//    funciones_menuprincipal fm = new funciones_menuprincipal();
-//    try {
-//        fm.conectar();
-//    } catch (SQLException ex) {
-//        Logger.getLogger(Menu_Principal.class.getName()).log(Level.SEVERE, null, ex);
-//    }
+  if(Clase_Variable_Publica.modulo == 3){
+      JOptionPane.showMessageDialog(rootPane, "El modulo de despacho ya esta abierto");  
+    }else{
         Despacho des = new Despacho();
-des.setVisible(true);
+        des.setVisible(true);
 //Facturacion.nombre_usu_fac.setText(nombre_usu_cli.getText());
 //this.dispose();
+  }
 }else{
 JOptionPane.showMessageDialog(rootPane, "Este usuario no tiene permiso para despacho");
 }
@@ -557,16 +552,14 @@ JOptionPane.showMessageDialog(rootPane, "Este usuario no tiene permiso para desp
 
     private void BtnusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnusuarioActionPerformed
 if(Clase_Variable_Publica.permiso_usu==0){
-//    funciones_menuprincipal fm = new funciones_menuprincipal();
-//    try {
-//        fm.conectar();
-//    } catch (SQLException ex) {
-//        Logger.getLogger(Menu_Principal.class.getName()).log(Level.SEVERE, null, ex);
-//    }
+ if(Clase_Variable_Publica.modulo == 7){
+      JOptionPane.showMessageDialog(rootPane, "El modulo de Usuarios ya esta abierto");  
+    }else{
         Usuarios usu = new Usuarios();
 usu.setVisible(true);
 Usuarios.nombre_usu_usu.setText(nombre_usu_cli.getText());
 //this.dispose();
+ }
 }else{
 JOptionPane.showMessageDialog(rootPane, "Este usuario no tiene permiso para usuarios");
 }
@@ -575,16 +568,14 @@ JOptionPane.showMessageDialog(rootPane, "Este usuario no tiene permiso para usua
 
     private void BtndeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtndeliveryActionPerformed
 if(Clase_Variable_Publica.permiso_delv==0){
-//    funciones_menuprincipal fm = new funciones_menuprincipal();
-//    try {
-//        fm.conectar();
-//    } catch (SQLException ex) {
-//        Logger.getLogger(Menu_Principal.class.getName()).log(Level.SEVERE, null, ex);
-//    }
+if(Clase_Variable_Publica.modulo == 5){
+      JOptionPane.showMessageDialog(rootPane, "El modulo de delivery ya esta abierto");  
+    }else{
         Delivery del = new Delivery();
 del.setVisible(true);
     Delivery.nombre_usu_delv.setText(nombre_usu_cli.getText());
 //this.dispose();
+}
 }else{
 JOptionPane.showMessageDialog(rootPane, "Este usuario no tiene permiso para delivery");
 }

@@ -158,16 +158,16 @@ private void PrintReportToPrinter(JasperPrint jp) throws JRException {
         
         JasperPrint jp = JasperFillManager.fillReport(jr, parametro,new JRBeanCollectionDataSource(lista1));
        //JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
-//       PrintReportToPrinter(jp);
+       PrintReportToPrinter(jp);
        limpiar1();
 cod_serv_fact.requestFocus();
 Clase_Variable_Publica.modificar_actrivo=0;
 sumar_total();
 
-        JasperViewer jv = new JasperViewer(jp,false);
-        jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        jv.setVisible(true);
-        
+//        JasperViewer jv = new JasperViewer(jp,false);
+//        jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//        jv.setVisible(true);
+
         }catch(JRException ex){
             ex.printStackTrace();
             JOptionPane.showInternalMessageDialog(null, "ERROR\n" + ex.getMessage());

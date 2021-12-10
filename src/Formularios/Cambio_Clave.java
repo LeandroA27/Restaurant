@@ -6,7 +6,6 @@ package Formularios;
 
 import Clases.conexion_2;
 import Clases.funciones_login;
-import com.sun.awt.AWTUtilities;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -40,7 +39,7 @@ public class Cambio_Clave extends javax.swing.JFrame {
             System.out.println(e);
         }
         this.setLocationRelativeTo(null);
-        AWTUtilities.setWindowOpaque(this, false);
+        this.setBackground(new Color(0,0,0,0));
                 tipofuente = new Fuentes();
         usuario_c.setFont(tipofuente.fuente(tipofuente.RIO,0,14));
         clave_anterior.setFont(tipofuente.fuente(tipofuente.RIO,0,14));

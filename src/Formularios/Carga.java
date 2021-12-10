@@ -9,10 +9,11 @@ import Clases.archivo_txt;
 import Clases.cargar_barra_eden;
 import Clases.conexion_2;
 import Clases.generador_numerico;
-import com.sun.awt.AWTUtilities;
+//import com.sun.awt.AWTUtilities;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -48,7 +49,7 @@ public class Carga extends javax.swing.JFrame {
         pan12.setVisible(false);
         pan13.setVisible(false);
         
-        AWTUtilities.setWindowOpaque(this, false);
+        this.setBackground(new Color(0,0,0,0));
         setLocationRelativeTo(null);
          try {
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Icono.png"));

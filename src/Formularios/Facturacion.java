@@ -11,14 +11,19 @@ import Clases.Factura_1;
 import Clases.conexion_2;
 import Clases.funciones_factura;
 import Clases.generador_numerico;
+import Clases.peticion;
 import Clases.render_tabla_prueba;
-import com.sun.awt.AWTUtilities;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.List;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -61,8 +66,14 @@ import tipografias.Fuentes;
  *
  * @author Leandro Aquino
  */
-public class Facturacion extends javax.swing.JFrame {
+public class Facturacion extends javax.swing.JFrame implements Runnable {
 
+    static ServerSocket ss;
+    static Socket s;
+    static DataInputStream din;
+    static DataOutputStream dout;
+    Thread hi;
+    
     Fuentes tipofuente;
      private final String Logo ="/Imagenes/Logo_calidad.png";
     private Connection conexion = null;
@@ -71,8 +82,9 @@ public class Facturacion extends javax.swing.JFrame {
     private String Monto_cuadre,cant_cuadre;
     public Facturacion() {
         initComponents();
+        Clase_Variable_Publica.modulo = 1;
         this.setLocationRelativeTo(null);
-        AWTUtilities.setWindowOpaque(this, false);
+        this.setBackground(new Color(0,0,0,0));
         cod_cli_fact.setText("00001");
         nom_cli_fact.setText("Cliente casual");
         precio_serv.setEditable(false);
@@ -1265,7 +1277,8 @@ descontarstock(capcod, capcan);
 }            
    limpiar1();
    desbloquear();
-
+   peticion pt = new peticion();
+   pt.run();
             //JOptionPane.showMessageDialog(null, "Datos Guardados Exitosamente");
         } catch (SQLException e) {
             conexion.rollback();
@@ -1399,7 +1412,8 @@ descontarstock(capcod, capcan);
             
  limpiar1();
  desbloquear();
-
+  peticion pt = new peticion();
+   pt.run();
             //JOptionPane.showMessageDialog(null, "Datos Guardados Exitosamente");
         } catch (SQLException e) {
             conexion.rollback();
@@ -1419,6 +1433,30 @@ descontarstock(capcod, capcan);
         }
     
     }   
+      
+   public void solicitud(){
+      String HOST = "10.0.0.11";
+             int PUERTO = 5000;
+             DataInputStream in;
+             DataOutputStream out; 
+             
+             try {
+            Socket sc = new Socket(HOST,PUERTO);
+            
+            in = new DataInputStream(sc.getInputStream());
+            out = new DataOutputStream(sc.getOutputStream());
+            
+            //out.writeUTF("Ejecuta el aasunto");
+            String mensaje = in.readUTF();
+            
+            //JOptionPane.showMessageDialog(null, mensaje);
+            
+            sc.close();
+            
+        } catch (Exception e) {
+        } 
+   }   
+      
         @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -2107,7 +2145,8 @@ public static String fechaactual() {
         //Menu_Principal ob = new Menu_Principal();
         //ob.setVisible(true);
         //nombre_usu_cli.setText(nombre_usu_fac.getText());
-        close();       // TODO add your handling code here:
+        close(); 
+        Clase_Variable_Publica.modulo = 0;// TODO add your handling code here:
     }//GEN-LAST:event_volverAtrasActionPerformed
 
     private void tablafacturacion1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablafacturacion1MouseClicked
@@ -2362,8 +2401,7 @@ public static String fechaactual() {
             procesar_fact.setEnabled(true);
             limpiar_fact.setEnabled(true);
             reimprimir_fact.setEnabled(false);
-            reimprimir_fact.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        }        // TODO add your handling code here:
+                    }        // TODO add your handling code here:
     }//GEN-LAST:event_nom_cli_factKeyPressed
 
     private void nom_cli_factKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nom_cli_factKeyTyped
@@ -2445,9 +2483,8 @@ public static String fechaactual() {
         if (!descrii_fact.getText().isEmpty()) {
             procesar_fact.setEnabled(true);
             limpiar_fact.setEnabled(true);
-            reimprimir_fact.setEnabled(false);
-            reimprimir_fact.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        }        // TODO add your handling code here:
+
+       }        // TODO add your handling code here:
     }//GEN-LAST:event_descrii_factKeyPressed
 
     private void descrii_factKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descrii_factKeyTyped
@@ -2480,9 +2517,30 @@ public static String fechaactual() {
                 cant_fact.requestFocus();
                 return;
             } else {
+                int cant = 0;
+                String[] registros = new String[5];
+    String sql = "SELECT existencia FROM articulo where cod_art = '"+cod_serv_fact.getText()+"'";
+
+try{
+    Statement st = cn.createStatement();
+    ResultSet rs = st.executeQuery(sql);
+    
+    while (rs.next()) {
+        registros[0] = rs.getString("existencia");
+        cant = Integer.parseInt(registros[0]);
+          }   
+    if(cant <=0){
+       JOptionPane.showMessageDialog(null, "Este articulo no tiene existencia");
+    }else{
+      
                 buscaProductoEnModelo();
                 sumar_total();
-                precio_serv.setEditable(false);
+                precio_serv.setEditable(false);     
+    }
+
+}catch (SQLException ex){
+    JOptionPane.showMessageDialog(null, ex);
+    }           
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe introducir un cliente");
@@ -2797,7 +2855,12 @@ public static String fechaactual() {
                 JOptionPane.showMessageDialog(null, "Debes de llenar todos los campos para proceder a la factura");
             }
         
-        
+ 
+ 
+
+    
+
+         
     }//GEN-LAST:event_procesar_factActionPerformed
 
     private void modificar_factMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificar_factMouseMoved
@@ -2927,6 +2990,8 @@ public static String fechaactual() {
 
             }
         }
+        
+        
     }//GEN-LAST:event_limpiar_factActionPerformed
 
     private void reimprimir_factMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reimprimir_factMouseMoved
@@ -3019,7 +3084,10 @@ else{
             public void run() {
                 new Facturacion().setVisible(true);
             }
-        });
+        }); 
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -3093,6 +3161,21 @@ else{
     public static javax.swing.JLabel total_fact;
     private javax.swing.JButton volverAtras;
     // End of variables declaration//GEN-END:variables
-    conector cc = new conector();
+    @Override 
+    public void run() {
+    Thread ct= Thread.currentThread();
+    
+    while(ct==hi){
+    solicitud();
+        try{
+            Thread.sleep(1000);
+        }catch(InterruptedException e){}
+        }    
+        
+      
+    }
+      conector cc = new conector();
     Connection cn = cc.conexion();
+   
+     
 }

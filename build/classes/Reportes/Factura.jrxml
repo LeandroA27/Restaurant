@@ -132,14 +132,14 @@ Santiago, Rep. Dom.]]></text>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="242" width="26" height="20" forecolor="#FFFFFF" uuid="ae9a4800-62ea-462d-b65d-77205b4b524e"/>
+				<reportElement x="59" y="242" width="26" height="20" forecolor="#FFFFFF" uuid="ae9a4800-62ea-462d-b65d-77205b4b524e"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CANT.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="57" y="242" width="68" height="20" forecolor="#FFFFFF" uuid="67a222f0-ad6a-458a-afa8-65bb56466d47"/>
+				<reportElement x="0" y="242" width="57" height="20" forecolor="#FFFFFF" uuid="67a222f0-ad6a-458a-afa8-65bb56466d47"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -153,7 +153,7 @@ Santiago, Rep. Dom.]]></text>
 				<text><![CDATA[TEL.: (829) 698-9319]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="125" y="242" width="44" height="20" forecolor="#FFFFFF" uuid="5ebb0a48-6a26-4cdd-b0e7-bb7aa205f2d2"/>
+				<reportElement x="123" y="242" width="44" height="20" forecolor="#FFFFFF" uuid="5ebb0a48-6a26-4cdd-b0e7-bb7aa205f2d2"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -173,37 +173,37 @@ Santiago, Rep. Dom.]]></text>
 		</band>
 	</title>
 	<detail>
-		<band height="16" splitType="Stretch">
+		<band height="25" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="1" width="14" height="15" uuid="87ea4ebb-1ae5-4a7b-80c9-58f449814152"/>
+				<reportElement x="54" y="9" width="14" height="15" uuid="87ea4ebb-1ae5-4a7b-80c9-58f449814152"/>
 				<textElement verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="3" y="1" width="15" height="15" uuid="df778ebb-16c3-4a29-9c1c-b0f9eb7fec57"/>
+				<reportElement x="57" y="9" width="15" height="15" uuid="df778ebb-16c3-4a29-9c1c-b0f9eb7fec57"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="14" y="1" width="43" height="15" uuid="68cd6fcf-4eb6-49b0-afcd-b0c8427d9b6c"/>
+				<reportElement x="68" y="9" width="43" height="15" uuid="68cd6fcf-4eb6-49b0-afcd-b0c8427d9b6c"/>
 				<textElement verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="57" y="1" width="68" height="15" uuid="f9814d0c-f62b-4c5f-8abb-0c753ebd4f6e"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="168" height="15" uuid="f9814d0c-f62b-4c5f-8abb-0c753ebd4f6e"/>
 				<textElement verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="125" y="1" width="44" height="15" uuid="2bae3b3a-e2bb-45d5-9c4a-882c81d856ca"/>
+				<reportElement x="111" y="9" width="57" height="15" uuid="2bae3b3a-e2bb-45d5-9c4a-882c81d856ca"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -310,6 +310,12 @@ Santiago, Rep. Dom.]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{delivery}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="0" y="0" width="169" height="1" forecolor="#333333" uuid="4cf9ef13-102b-4e17-9ae8-f78e25017b6e"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
 		</band>
 	</summary>
 </jasperReport>
