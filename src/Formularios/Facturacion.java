@@ -13,6 +13,7 @@ import Clases.funciones_factura;
 import Clases.generador_numerico;
 import Clases.peticion;
 import Clases.render_tabla_prueba;
+import Clases.servidor;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
@@ -66,7 +67,7 @@ import tipografias.Fuentes;
  *
  * @author Leandro Aquino
  */
-public class Facturacion extends javax.swing.JFrame implements Runnable {
+public class Facturacion extends javax.swing.JFrame {
 
     static ServerSocket ss;
     static Socket s;
@@ -80,8 +81,15 @@ public class Facturacion extends javax.swing.JFrame implements Runnable {
     private String codigoS = "";
     private String ub = Clase_Variable_Publica.ubicacion; 
     private String Monto_cuadre,cant_cuadre;
+    private servidor serv;
+
     public Facturacion() {
         initComponents();
+    serv =new servidor(5000);
+    Thread t = new Thread(serv);
+    t.start();
+
+
         Clase_Variable_Publica.modulo = 1;
         this.setLocationRelativeTo(null);
         this.setBackground(new Color(0,0,0,0));
@@ -1277,8 +1285,7 @@ descontarstock(capcod, capcan);
 }            
    limpiar1();
    desbloquear();
-   peticion pt = new peticion();
-   pt.run();
+
             //JOptionPane.showMessageDialog(null, "Datos Guardados Exitosamente");
         } catch (SQLException e) {
             conexion.rollback();
@@ -1412,8 +1419,6 @@ descontarstock(capcod, capcan);
             
  limpiar1();
  desbloquear();
-  peticion pt = new peticion();
-   pt.run();
             //JOptionPane.showMessageDialog(null, "Datos Guardados Exitosamente");
         } catch (SQLException e) {
             conexion.rollback();
@@ -3161,20 +3166,7 @@ else{
     public static javax.swing.JLabel total_fact;
     private javax.swing.JButton volverAtras;
     // End of variables declaration//GEN-END:variables
-    @Override 
-    public void run() {
-    Thread ct= Thread.currentThread();
-    
-    while(ct==hi){
-    solicitud();
-        try{
-            Thread.sleep(1000);
-        }catch(InterruptedException e){}
-        }    
-        
-      
-    }
-      conector cc = new conector();
+    conector cc = new conector();
     Connection cn = cc.conexion();
    
      

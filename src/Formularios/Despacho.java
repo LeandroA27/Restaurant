@@ -9,6 +9,7 @@ import Clases.Clase_Variable_Publica;
 import Clases.Timer_Despacho;
 import Clases.conexion_2;
 import Clases.funcion_despacho;
+import Clases.servidor;
 import static Formularios.Consulta_Producto.tabla_servicios;
 import static Formularios.Facturacion.cod_serv_fact;
 import static Formularios.Facturacion.tablafacturacion1;
@@ -33,6 +34,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,7 +50,7 @@ import tipografias.Fuentes;
  *
  * @author Leandro Aquino
  */
-public class Despacho extends javax.swing.JFrame implements Runnable {
+public class Despacho extends javax.swing.JFrame implements Observer {
     static Socket s;
     static DataInputStream din;
     static DataOutputStream dout; 
@@ -72,9 +75,10 @@ public class Despacho extends javax.swing.JFrame implements Runnable {
         tablaDespacho.setFont(tipofuente.fuente(tipofuente.RIO, 0, 30));
         Timer_Despacho despacho = new Timer_Despacho();
         despacho.run();
-        hi = new Thread(this);
-        hi.start();
-      
+        servidor s = new servidor(5000);
+        s.addObserver(this);
+        Thread t = new Thread(s);
+        t.start();
     }
     
     public void conectar() throws SQLException {
@@ -147,34 +151,7 @@ DefaultTableModel model = (DefaultTableModel) tablaDespacho.getModel();
         int filas = model.getRowCount();
         cantidad_pedidos.setText(String.valueOf(filas)); 
 }
-public void escucha(){
-    ServerSocket servidor = null;
-    Socket sc = null;
-    final int PUERTO = 5000;
-    DataInputStream in;
-    DataOutputStream out;
-    
-        try {
-            servidor = new ServerSocket(PUERTO);
-            
-            while(true){
-                sc = servidor.accept();
-                in = new DataInputStream(sc.getInputStream());
-                out = new DataOutputStream(sc.getOutputStream());
-                
-                String mensaje = in.readUTF();
-                
-                //JOptionPane.showMessageDialog(null, mensaje);
-                out.writeUTF("Hay una Conexion");
-                sc.close();  
-                Timer_Despacho despacho = new Timer_Despacho();
-                despacho.run();
-            }
-            
-        } catch (Exception e) {
-        }
- 
-}
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -426,19 +403,16 @@ public void escucha(){
     public static javax.swing.JTable tablaDespacho;
     private javax.swing.JButton volverAtras;
     // End of variables declaration//GEN-END:variables
-    @Override
-    public void run() {
-    Thread ct= Thread.currentThread();
     
-    while(ct==hi){
-    escucha();
-        try{
-            Thread.sleep(1000);
-        }catch(InterruptedException e){}
-        }    
-        
-      
-    }
+@Override
+public void update(Observable o, Object arg){
+
+    System.out.println(arg);
+    Timer_Despacho despacho = new Timer_Despacho();
+    despacho.run();
+
+
+}
     conector cc = new conector();
     Connection cn = cc.conexion();
 

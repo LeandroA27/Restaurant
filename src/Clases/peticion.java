@@ -15,26 +15,28 @@ import javax.swing.JOptionPane;
  * @author Leandro Aquino
  */
 public class peticion implements Runnable {
-    @Override
+ private int puerto;
+ private String mensaje;  
+ 
+public peticion (int puerto, String mensaje){
+ this.puerto = puerto;
+ this.mensaje = mensaje;
+
+}
+
+  @Override
     public void run() {
-        String HOST = "192.168.1.17";
-             int PUERTO = 5000;
-             DataInputStream in;
+             String HOST = "127.0.0.1";
              DataOutputStream out; 
              
              try {
-            Socket sc = new Socket(HOST,PUERTO);
+            Socket sc = new Socket(HOST,puerto);
             
-            in = new DataInputStream(sc.getInputStream());
             out = new DataOutputStream(sc.getOutputStream());
             
-            out.writeUTF("Ejecuta el asunto");
-            String mensaje = in.readUTF();
-            
-            //JOptionPane.showMessageDialog(null, mensaje);
-            
+            out.writeUTF(mensaje);
             sc.close();
-            
+
         } catch (Exception e) {
         }
     }

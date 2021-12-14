@@ -538,8 +538,9 @@ if(!devuelta.getText().isEmpty()){
                 Conexion_factura_guardar cfg = new Conexion_factura_guardar();
                 try {
                     cfg.conectar();
-                     peticion pt = new peticion();
-                     pt.run();
+                     peticion p = new peticion(6000, "Ejecuta");
+                     Thread th = new Thread(p);
+                     th.start();
                     this.dispose();
                     } catch (SQLException ex) {
                     Logger.getLogger(Facturacion.class.getName()).log(Level.SEVERE, null, ex);
@@ -552,8 +553,9 @@ if(!devuelta.getText().isEmpty()){
                         Conexion_factura_Modificar cfm = new Conexion_factura_Modificar();
                         try {
                             cfm.conectar();
-                            peticion pt = new peticion();
-                            pt.run();
+                     peticion p = new peticion(6000, "Ejecuta");
+                     Thread th = new Thread(p);
+                     th.start();
                             this.dispose();
                         } catch (SQLException ex) {
                             Logger.getLogger(Facturacion.class.getName()).log(Level.SEVERE, null, ex);
@@ -562,8 +564,9 @@ if(!devuelta.getText().isEmpty()){
                     }else{
                 
                 reimprimir1();
-                 peticion pt = new peticion();
-                 pt.run();
+                     peticion p = new peticion(6000, "Ejecuta");
+                     Thread th = new Thread(p);
+                     th.start();
                this.dispose();
             }
             
