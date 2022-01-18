@@ -180,7 +180,7 @@ public class Conexion_factura_guardar {
         
         JasperPrint jp = JasperFillManager.fillReport(jr, parametro,new JRBeanCollectionDataSource(lista1));
        //JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
-       PrintReportToPrinter(jp);
+       //PrintReportToPrinter(jp);
        limpiar1();
 cod_serv_fact.requestFocus();
 
@@ -191,9 +191,9 @@ sumar_total();
     Consultar_num_cot();    
     }
         
-//        JasperViewer jv = new JasperViewer(jp,false);
-//        jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//        jv.setVisible(true);
+        JasperViewer jv = new JasperViewer(jp,false);
+        jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        jv.setVisible(true);
     
         }catch(JRException ex){
             ex.printStackTrace();

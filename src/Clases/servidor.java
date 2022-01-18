@@ -37,7 +37,9 @@ ServerSocket servidor = null;
                 sc = servidor.accept();
                 in = new DataInputStream(sc.getInputStream());
                                
+                
                 String mensaje = in.readUTF();
+                
                 this.setChanged();
                 this.notifyObservers(mensaje);
                 this.clearChanged();

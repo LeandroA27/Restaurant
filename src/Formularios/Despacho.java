@@ -411,7 +411,6 @@ public void update(Observable o, Object arg){
     Timer_Despacho despacho = new Timer_Despacho();
     despacho.run();
 
-
 }
     conector cc = new conector();
     Connection cn = cc.conexion();

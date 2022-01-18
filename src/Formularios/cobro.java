@@ -11,6 +11,7 @@ import Clases.Conexion_factura_guardar;
 import Clases.Factura_1;
 import Clases.generador_numerico;
 import Clases.peticion;
+import Clases.servidor;
 import static Formularios.Cambio_Clave.clave_anterior;
 import static Formularios.Cambio_Clave.clave_nueva;
 import static Formularios.Cambio_Clave.confirmar_clave;
@@ -56,6 +57,8 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.print.attribute.HashPrintRequestAttributeSet;
@@ -85,13 +88,17 @@ import tipografias.Fuentes;
  *
  * @author Leandro Aquino
  */
-public class cobro extends javax.swing.JFrame implements Runnable {
+public class cobro extends javax.swing.JFrame implements Observer {
 Fuentes tipofuente;
 Thread hi;
 private String ubic = Clase_Variable_Publica.ubicacion; 
  private final String Logo ="/Imagenes/Logo_calidad.png";
     public cobro() {
         initComponents();
+        servidor s = new servidor(5000);
+        s.addObserver(this);
+        Thread t = new Thread(s);
+        t.start();
          try {
         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Icono.png"));
         setIconImage(icon);
@@ -176,7 +183,7 @@ void reimprimir1(){
         
         JasperPrint jp = JasperFillManager.fillReport(jr, parametro,new JRBeanCollectionDataSource(lista1));
        //JasperPrint jprint = JasperFillManager.fillReport(reporte, null, new JRBeanCollectionDataSource(lista));
-       PrintReportToPrinter(jp);
+       //PrintReportToPrinter(jp);
        limpiar1();
 cod_serv_fact.requestFocus();
 Clase_Variable_Publica.modificar_actrivo=0;
@@ -188,9 +195,9 @@ desbloquear();
                     Consultar_num_cot();    
                     }
 
-//        JasperViewer jv = new JasperViewer(jp,false);
-//        jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//        jv.setVisible(true);
+        JasperViewer jv = new JasperViewer(jp,false);
+        jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        jv.setVisible(true);
         
         }catch(JRException ex){
             ex.printStackTrace();
@@ -538,10 +545,12 @@ if(!devuelta.getText().isEmpty()){
                 Conexion_factura_guardar cfg = new Conexion_factura_guardar();
                 try {
                     cfg.conectar();
-                     peticion p = new peticion(6000, "Ejecuta");
-                     Thread th = new Thread(p);
-                     th.start();
-                    this.dispose();
+                     String msj ="Ejecuta";
+                     peticion p = new peticion("10.0.0.24",5000, msj);
+                     Thread t = new Thread(p);
+                     t.start();
+                     
+                     this.dispose();
                     } catch (SQLException ex) {
                     Logger.getLogger(Facturacion.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -553,9 +562,10 @@ if(!devuelta.getText().isEmpty()){
                         Conexion_factura_Modificar cfm = new Conexion_factura_Modificar();
                         try {
                             cfm.conectar();
-                     peticion p = new peticion(6000, "Ejecuta");
-                     Thread th = new Thread(p);
-                     th.start();
+                     String msj ="Ejecuta";
+                     peticion p = new peticion("10.0.0.24",5000, msj);
+                     Thread t = new Thread(p);
+                     t.start();
                             this.dispose();
                         } catch (SQLException ex) {
                             Logger.getLogger(Facturacion.class.getName()).log(Level.SEVERE, null, ex);
@@ -564,9 +574,10 @@ if(!devuelta.getText().isEmpty()){
                     }else{
                 
                 reimprimir1();
-                     peticion p = new peticion(6000, "Ejecuta");
-                     Thread th = new Thread(p);
-                     th.start();
+                     String msj ="Ejecuta";
+                     peticion p = new peticion("10.0.0.24",5000, msj);
+                     Thread t = new Thread(p);
+                     t.start();
                this.dispose();
             }
             
@@ -681,20 +692,12 @@ if (monto > dinero){
     public static javax.swing.JLabel pago_delivery;
     private javax.swing.JButton procesar_cobro;
     // End of variables declaration//GEN-END:variables
-    @Override
-     public void run() {
-    Thread ct= Thread.currentThread();
-    
-    while(ct==hi){
-    solicitud();
-        try{
-            Thread.sleep(1000);
-        }catch(InterruptedException e){}
-        }    
-        
-      
-    }
         conector cc = new conector();
     Connection cn = cc.conexion();    
+
+    @Override
+    public void update(Observable o, Object arg) {
+    System.out.println(arg); 
+    }
     
 }

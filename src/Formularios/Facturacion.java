@@ -1460,7 +1460,27 @@ descontarstock(capcod, capcan);
             
         } catch (Exception e) {
         } 
-   }   
+   } 
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+   public void borrar1() throws SQLException{
+        try {
+        PreparedStatement psU2 = cn.prepareStatement("delete from detalle_fact where num_factura='"+num_fact_1.getText()+"'");
+        psU2.executeUpdate();
+           }catch (SQLException ex){
+                    Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE,null, ex);
+                        }
+        }
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////
+   public void borrar12() throws SQLException{
+        try {
+        PreparedStatement psU2 = cn.prepareStatement("delete from encabezado_factura where num_factura='"+num_fact_1.getText()+"'");
+        psU2.executeUpdate();
+        
+        JOptionPane.showMessageDialog(null, "Factura Borrada");
+         }catch (SQLException ex){
+                    Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE,null, ex);
+                        }
+        }
       
         @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1524,6 +1544,7 @@ descontarstock(capcod, capcan);
         procesar_fact = new javax.swing.JButton();
         modificar_fact = new javax.swing.JButton();
         limpiar_fact = new javax.swing.JButton();
+        borrar_fact = new javax.swing.JButton();
         reimprimir_fact = new javax.swing.JButton();
         cuadre_caja = new javax.swing.JButton();
         enviar_delivery = new javax.swing.JCheckBox();
@@ -1568,21 +1589,21 @@ descontarstock(capcod, capcan);
 
         buscar_rnc.setBorder(null);
         buscar_rnc.setContentAreaFilled(false);
-        buscar_rnc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buscar_rnc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         buscar_rnc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscar_rncActionPerformed(evt);
             }
         });
 
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
             }
         });
 
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
@@ -1608,7 +1629,7 @@ descontarstock(capcod, capcan);
         btn_minimizar.setToolTipText("Minimizar");
         btn_minimizar.setBorder(null);
         btn_minimizar.setContentAreaFilled(false);
-        btn_minimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_minimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_minimizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_minimizarActionPerformed(evt);
@@ -1618,7 +1639,7 @@ descontarstock(capcod, capcan);
 
         volverAtras.setBorder(null);
         volverAtras.setContentAreaFilled(false);
-        volverAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        volverAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         volverAtras.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 volverAtrasMouseMoved(evt);
@@ -1659,7 +1680,7 @@ descontarstock(capcod, capcan);
                 return canEdit [columnIndex];
             }
         });
-        tablafacturacion1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tablafacturacion1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tablafacturacion1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         tablafacturacion1.setDragEnabled(true);
         tablafacturacion1.setSelectionBackground(new java.awt.Color(198, 54, 53));
@@ -1692,7 +1713,7 @@ descontarstock(capcod, capcan);
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 255, 170, 20));
 
         Btnarticulo.setContentAreaFilled(false);
-        Btnarticulo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Btnarticulo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Btnarticulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnarticuloActionPerformed(evt);
@@ -1701,7 +1722,7 @@ descontarstock(capcod, capcan);
         getContentPane().add(Btnarticulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 240, 40));
 
         Btndespacho.setContentAreaFilled(false);
-        Btndespacho.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Btndespacho.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Btndespacho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtndespachoActionPerformed(evt);
@@ -1710,7 +1731,7 @@ descontarstock(capcod, capcan);
         getContentPane().add(Btndespacho, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 240, 40));
 
         Btninventario.setContentAreaFilled(false);
-        Btninventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Btninventario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Btninventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtninventarioActionPerformed(evt);
@@ -1719,7 +1740,7 @@ descontarstock(capcod, capcan);
         getContentPane().add(Btninventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 240, 40));
 
         Btndelivery.setContentAreaFilled(false);
-        Btndelivery.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Btndelivery.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Btndelivery.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtndeliveryActionPerformed(evt);
@@ -1728,7 +1749,7 @@ descontarstock(capcod, capcan);
         getContentPane().add(Btndelivery, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 240, 40));
 
         Btncomprobantes.setContentAreaFilled(false);
-        Btncomprobantes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Btncomprobantes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Btncomprobantes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtncomprobantesActionPerformed(evt);
@@ -1737,7 +1758,7 @@ descontarstock(capcod, capcan);
         getContentPane().add(Btncomprobantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 570, 240, 40));
 
         Btnusuario.setContentAreaFilled(false);
-        Btnusuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Btnusuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Btnusuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnusuarioActionPerformed(evt);
@@ -1826,7 +1847,7 @@ descontarstock(capcod, capcan);
 
         buscar_serv.setBorder(null);
         buscar_serv.setContentAreaFilled(false);
-        buscar_serv.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buscar_serv.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         buscar_serv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscar_servActionPerformed(evt);
@@ -1874,7 +1895,7 @@ descontarstock(capcod, capcan);
         tipo_comp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         tipo_comp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Consumidor Final", "Crédito Fiscal" }));
         tipo_comp.setBorder(null);
-        tipo_comp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tipo_comp.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tipo_comp.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 tipo_compItemStateChanged(evt);
@@ -1984,7 +2005,7 @@ descontarstock(capcod, capcan);
 
         procesar_fact.setBorder(null);
         procesar_fact.setContentAreaFilled(false);
-        procesar_fact.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        procesar_fact.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         procesar_fact.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 procesar_factMouseMoved(evt);
@@ -2004,7 +2025,7 @@ descontarstock(capcod, capcan);
 
         modificar_fact.setBorder(null);
         modificar_fact.setContentAreaFilled(false);
-        modificar_fact.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificar_fact.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         modificar_fact.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 modificar_factMouseMoved(evt);
@@ -2024,7 +2045,7 @@ descontarstock(capcod, capcan);
 
         limpiar_fact.setBorder(null);
         limpiar_fact.setContentAreaFilled(false);
-        limpiar_fact.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        limpiar_fact.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         limpiar_fact.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 limpiar_factMouseMoved(evt);
@@ -2042,9 +2063,29 @@ descontarstock(capcod, capcan);
         });
         getContentPane().add(limpiar_fact, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 595, 130, 30));
 
+        borrar_fact.setBorder(null);
+        borrar_fact.setContentAreaFilled(false);
+        borrar_fact.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        borrar_fact.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                borrar_factMouseMoved(evt);
+            }
+        });
+        borrar_fact.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                borrar_factMouseExited(evt);
+            }
+        });
+        borrar_fact.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrar_factActionPerformed(evt);
+            }
+        });
+        getContentPane().add(borrar_fact, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 630, 110, 30));
+
         reimprimir_fact.setBorder(null);
         reimprimir_fact.setContentAreaFilled(false);
-        reimprimir_fact.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reimprimir_fact.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         reimprimir_fact.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 reimprimir_factMouseMoved(evt);
@@ -2063,7 +2104,7 @@ descontarstock(capcod, capcan);
         getContentPane().add(reimprimir_fact, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 630, 140, 30));
 
         cuadre_caja.setContentAreaFilled(false);
-        cuadre_caja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cuadre_caja.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cuadre_caja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cuadre_cajaActionPerformed(evt);
@@ -2072,7 +2113,7 @@ descontarstock(capcod, capcan);
         getContentPane().add(cuadre_caja, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 590, 180, 40));
 
         enviar_delivery.setContentAreaFilled(false);
-        enviar_delivery.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        enviar_delivery.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         enviar_delivery.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enviar_deliveryActionPerformed(evt);
@@ -2081,7 +2122,7 @@ descontarstock(capcod, capcan);
         getContentPane().add(enviar_delivery, new org.netbeans.lib.awtextra.AbsoluteConstraints(1147, 132, 100, -1));
 
         cuenta_abierta.setContentAreaFilled(false);
-        cuenta_abierta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cuenta_abierta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cuenta_abierta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cuenta_abiertaMouseClicked(evt);
@@ -2096,12 +2137,12 @@ descontarstock(capcod, capcan);
 
         buttonGroup1.add(para_comerAqui);
         para_comerAqui.setContentAreaFilled(false);
-        para_comerAqui.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        para_comerAqui.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(para_comerAqui, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 257, 120, -1));
 
         buttonGroup1.add(para_llevar);
         para_llevar.setContentAreaFilled(false);
-        para_llevar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        para_llevar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(para_llevar, new org.netbeans.lib.awtextra.AbsoluteConstraints(642, 257, 80, -1));
 
         jPanel7.setBackground(new java.awt.Color(228, 228, 228));
@@ -3057,6 +3098,46 @@ else{
     }        // TODO add your handling code here:
     }//GEN-LAST:event_enviar_deliveryActionPerformed
 
+    private void borrar_factMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_borrar_factMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_borrar_factMouseMoved
+
+    private void borrar_factMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_borrar_factMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_borrar_factMouseExited
+
+    private void borrar_factActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrar_factActionPerformed
+    if(!reimprimir_fact.isEnabled()){
+    String texto = JOptionPane.showInputDialog(rootPane, "Ingrese la Clave");
+    if(!texto.equals(JOptionPane.CANCEL_OPTION) && !texto.equals(JOptionPane.CLOSED_OPTION)){
+         int clave1 = Clase_Variable_Publica.clave_borrar; 
+         int clave = Integer.parseInt(texto);
+    
+    if(clave == clave1){
+        if (JOptionPane.showConfirmDialog(rootPane, "¿Desea realmente borrar la factura?",
+                "Borrar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            try {
+                borrar1();
+                borrar12();
+                limpiar_tabla();
+                limpiar1();
+                desbloquear();
+            } catch (SQLException ex) {
+                Logger.getLogger(Facturacion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+             
+    }else{
+        JOptionPane.showMessageDialog(null, "Clave incorrecta");
+    }
+    }
+    }else{
+      JOptionPane.showMessageDialog(null, "Debe de seleccionar la factura que desea borrar");  
+    }
+    
+// TODO add your handling code here:
+    }//GEN-LAST:event_borrar_factActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3102,6 +3183,7 @@ else{
     private javax.swing.JButton Btndespacho;
     private javax.swing.JButton Btninventario;
     private javax.swing.JButton Btnusuario;
+    public static javax.swing.JButton borrar_fact;
     private javax.swing.JButton btn_minimizar;
     public static javax.swing.JButton buscar_rnc;
     public static javax.swing.JButton buscar_serv;
